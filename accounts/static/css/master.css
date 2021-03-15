@@ -1,0 +1,26 @@
+.slide{
+  max-height:500px !important;
+}
+
+.section{
+  text-align:center;
+  font-family: cursive;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #e9ecef;
+  border-radius: .3rem;
+}
+
+.box{
+  width: 30rem;
+  margin-bottom: 10px;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+  margin-left: 25rem;
+}
+
+.Card_Container{
+  text-align: center;
+}
