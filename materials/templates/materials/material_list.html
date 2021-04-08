@@ -1,0 +1,33 @@
+{% extends "projects/project_detail_base.html" %}
+
+{% block with_pbase %}
+  <div class="jumbotron section">
+    <h3>Here's the list of all the Materials:</h1>
+    <p>To add new Material press Add</p>
+    <p><a class='btn btn-primary' href="#">Add</a></p>
+  </div>
+
+  {% if materials %}
+    <div class="container-fluid Card_Container">
+      {% for material in materials %}
+      <div class="card box">
+        <div class="card-body">
+          <h5 class="card-title">{{material.type}}</h5>
+          <p class="card-text">Quantity: {{material.quantity}}, Price per unit: {{material.price}} </p>
+          <a href="#" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+  <div class="container-fluid Card_Container">
+    <div class="card box">
+      <div class="card-body">
+        <h5 class="card-title">No projects yet!</h5>
+        <p class="card-text">Click on create to get started</p>
+        <p><a class='btn btn-primary' href="{% url '#' %}">Create</a></p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{% endblock %}

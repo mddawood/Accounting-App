@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="jumbotron section">
+    <h3>Here's the list of all the Projects:</h1>
+    <p>To create new project press create</p>
+    <p><a class='btn btn-primary' href="{% url 'projects:p_create' %}">Create</a></p>
+  </div>
+
+  {% if projects %}
+    <div class="container-fluid Card_Container">
+      {% for project in projects %}
+      <div class="card box">
+        <div class="card-body">
+          <h5 class="card-title">{{project.project_name}}</h5>
+          <p class="card-text">Client: {{project.client_name}}</p>
+          <a href="{{project.id}}/" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+  <div class="container-fluid Card_Container">
+    <div class="card box">
+      <div class="card-body">
+        <h5 class="card-title">No projects yet!</h5>
+        <p class="card-text">Click on create to get started</p>
+        <p><a class='btn btn-primary' href="{% url 'projects:p_create' %}">Create</a></p>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+{% endblock %}

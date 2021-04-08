@@ -1,0 +1,29 @@
+.slide{
+  max-height:500px !important;
+}
+
+.section{
+  margin-top: 0px;
+  font-family: cursive;
+}
+
+.jumbotron {
+  padding: 2rem 1rem;
+  background-color: #e9ecef;
+  border-radius: .3rem;
+}
+
+.box{
+  width: 25rem;
+  margin-bottom: 10px;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+  margin-left: 25rem;
+  text-align: center;
+}
+
+.stats {
+  width: 20rem;
+  height: 10rem;
+  margin-bottom: 2rem;
+  box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.75);
+}

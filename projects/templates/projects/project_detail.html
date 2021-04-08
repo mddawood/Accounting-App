@@ -1,0 +1,46 @@
+{% extends "projects/project_detail_base.html" %}
+
+{% block with_pbase %}
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col">
+        <div class="card stats">
+          <div class="card-body">
+            Labour details will come here
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card stats">
+          <div class="card-body">
+            Material Details goes here
+            <a class="btn btn-primary btn-comment" href="{% url 'materials:m_list' %}">Materials</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-sm">
+          One of two columns
+        </div>
+
+        <div class="col-sm">
+          <h3>The materials are as follows:</h3>
+          {% for material in project_details.materials.all %}
+            <p>{{material.type}}</p>
+          {% endfor %}
+        </div>
+
+      </div>
+    </div>
+  </div> -->
+{% endblock %}
