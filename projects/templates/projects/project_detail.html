@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <!-- <div class="jumbotron">
+  <div class="jumbotron">
     <div class="container">
       <div class="row">
 
@@ -36,11 +36,12 @@
         <div class="col-sm">
           <h3>The materials are as follows:</h3>
           {% for material in project_details.materials.all %}
+            
             <p>{{material.type}}</p>
           {% endfor %}
         </div>
 
       </div>
     </div>
-  </div> -->
+  </div>
 {% endblock %}

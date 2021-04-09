@@ -10,20 +10,21 @@ from django.http import HttpResponse
 # Create your views here.
 
 # @login_required
-# def MaterialList(request, Pid):
-#     project = get_object_or_404(Project, pk=Pid)
-#     materials = Material.objects.filter(project.pk == Pid)
-#     return render(request, 'materials/material_list.html', {'materials': materials})
+# def MaterialList(request, pk):
+#     project = get_object_or_404(Project, pk=pk)
+#     print(project)
+#     materials = Material.objects.filter(project.pk = pk)
+#     return render(request, 'materials/material_list.html', {'materials': "hello"})
 
 
-class MaterialListView(LoginRequiredMixin, ListView):
-    context_object_name = 'materials'
-    model = Material
-
-# class MaterialDetailView(DetailView):
-#     context_object_name = 'material_details'
+# class MaterialListView(LoginRequiredMixin, ListView):
+#     context_object_name = 'materials'
 #     model = Material
-#     template = 'materials/material_detail.html'
+
+class MaterialDetailView(DetailView):
+    context_object_name = 'material_details'
+    model = Material
+    template = 'materials/material_detail.html'
 #
 # class MaterialCreateView(CreateView):
 #     fields = ('type', 'quantity', 'price')

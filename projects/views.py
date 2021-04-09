@@ -14,14 +14,12 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     template_name = 'projects/project_detail.html'
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
-    fields = '__all__'
+    fields = ("project_name","client_name","start_date","address")
     model = Project
-    success_url = reverse_lazy("projects:p_list")
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
-    fields = '__all__'
+    fields = ("project_name","client_name","start_date","address")
     model = Project
-    success_url = reverse_lazy("projects:p_list")
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project

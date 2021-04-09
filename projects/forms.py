@@ -1,7 +1,7 @@
 # from django import forms
-# from projects.models import Material
+# from projects.models import Project
 #
-# class MaterialForm(forms.ModelForm):
+# class ProjectForm(forms.ModelForm):
 #     class Meta():
-#         model = Material
-#         fields = ('type', 'quantity', 'price')
+#         model = Project
+#         fields = '__all__',
