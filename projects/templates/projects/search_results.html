@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  {% if object_list  %}
+    <div class="container-fluid">
+      {% for project in object_list %}
+      <div class="card box">
+        <div class="card-body">
+          <h5 class="card-title">{{project.project_name}}</h5>
+          <p class="card-text">Client: {{project.client_name}}</p>
+          <p class="card-text">Total Expenses: {{ project.total_pay | add:project.mat_exp }}</p>
+          <a href="{% url 'projects:p_detail' slug=project.slug %}" class="btn btn-primary">Details</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <br>
+  {% else %}
+  <div class="container-fluid">
+    <div class="card box">
+      <div class="card-body">
+        <h5 class="card-title">No projects found</h5>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+{% endblock %}

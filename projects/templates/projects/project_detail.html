@@ -1,47 +1,71 @@
-{% extends "projects/project_detail_base.html" %}
+{% extends "base.html" %}
+{% load static %}
 
-{% block with_pbase %}
+{% block content %}
+
+  <div class="jumbotron section">
+    <h1>Welcome to the Project Detail Page</h1>
+    <p><a class='btn btn-warning' href="{% url 'projects:p_update' slug=project_details.slug %}">Update</a>
+    <a class='btn btn-danger' href="{% url 'projects:p_delete' slug=project_details.slug %}">Delete</a></p>
+    <p>Project Name: {{project_details.project_name}}</p>
+    <p>Client: {{project_details.client_name}}</p>
+    <p>Address: {{project_details.address}}</p>
+    <p>Start Date: {{project_details.start_date}}</p>
+  </div>
 
   <div class="container">
     <div class="row">
 
-      <div class="col">
+      <div class="col-md-5">
         <div class="card stats">
           <div class="card-body">
-            Labour details will come here
+            <p>Number of Labours used: {{project_details.labours.count}}</p>
+            <p>Total payments to labours: {{project_details.total_pay}}</p>
           </div>
         </div>
       </div>
 
-      <div class="col">
+      <div class="col-md-5 offset-md-1">
         <div class="card stats">
           <div class="card-body">
-            Material Details goes here
-            <a class="btn btn-primary btn-comment" href="{% url 'materials:m_list' %}">Materials</a>
+            <p>Number of materials used: {{project_details.materials.count}}</p>
+            <p>Total expenses in material: {{project_details.mat_exp}}</p>
           </div>
         </div>
       </div>
 
     </div>
   </div>
+  <br>
 
-  <div class="jumbotron">
-    <div class="container">
-      <div class="row">
+  <div class="container">
+    <div class="row">
 
-        <div class="col-sm">
-          One of two columns
+        <div class="col-md-5 jumbotron">
+
+          <p><a class='btn btn-warning' href="{% url 'labours:l_create' slug=project_details.slug %}">Add</a>
+          <h3>Labours used:</h3>
+          <ol>
+            {% for labour in project_details.labours.all %}
+              <li><a href="{% url 'labours:l_detail' pk=labour.pk %}">{{labour.name}}</a></li>
+            {% endfor %}
+          </ol>
+
         </div>
 
-        <div class="col-sm">
-          <h3>The materials are as follows:</h3>
-          {% for material in project_details.materials.all %}
-            
-            <p>{{material.type}}</p>
-          {% endfor %}
+        <div class="col-md-5 offset-md-1 jumbotron">
+
+          <p><a class='btn btn-warning' href="{% url 'materials:m_create' slug=project_details.slug %}">Add</a>
+          <h3>Materials used:</h3>
+          <ol>
+            {% for material in project_details.materials.all %}
+              <li><a href="{% url 'materials:m_detail' pk=material.pk %}">{{material.type}}</a></li>
+            {% endfor %}
+          </ol>
+
         </div>
 
-      </div>
     </div>
   </div>
+
 {% endblock %}

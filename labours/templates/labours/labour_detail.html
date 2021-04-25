@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron section">
+  <a class='btn btn-warning' href="{% url 'labours:l_update' pk=labour.pk %}">Update</a>
+  <a class='btn btn-danger' href="{% url 'labours:l_delete' pk=labour.pk %}">Delete</a>
+
+  <h1><a href="{% url 'projects:p_detail' slug=labour.project.slug %}">Project {{labour.project}}</a></h1>
+  <h2>Labour name: {{labour.name}}</h2>
+  <h2>labour type: {{labour.type}}</h2>
+  <h2>Wage: {{labour.wage}}</h2>
+  <h3>Total paid: {{labour.total_pay}}</h3>
+
+</div>
+
+<div class="container section">
+  <a class='btn btn-primary' href="{% url 'labours:pay' pk=labour.pk %}">Pay</a>
+  <br>
+  <hr>
+  {% for payment in  labour.payments.all %}
+  <div class="card">
+    <div class="card-body">
+      <a class='btn btn-primary' href="{% url 'labours:pay_del' pk=payment.pk %}">Delete</a>
+      <p>{{payment.name}}</p>
+      <p>Date: {{payment.date}}</p>
+      <p>Days worked: {{payment.days}}</p>
+      <p>Total: {{payment.total}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

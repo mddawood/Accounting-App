@@ -1,7 +1,11 @@
 from . models import Project
+from materials.models import Material
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView)
 from django.contrib.auth.mixins import LoginRequiredMixin
+from braces.views import SelectRelatedMixin
+from django.shortcuts import render
+from django.db.models import Q
 
 # Create your views here.
 class ProjectListView(LoginRequiredMixin, ListView):
@@ -20,25 +24,19 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):
     fields = ("project_name","client_name","start_date","address")
     model = Project
+    template_name = 'projects/project_form.html'
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     model = Project
     success_url = reverse_lazy('projects:p_list')
 
-##############################################
-#########Function views for materials#########
-##############################################
+class SearchResultsView(LoginRequiredMixin, ListView):
+    model = Project
+    template_name = 'projects/search_results.html'
 
-# def add_material(request, pk):
-#     project = get_object_or_404(models.Project, pk=pk)
-#     if request.method == "POST":
-#         form = MaterialForm(request.POST)
-#         if form.is_valid():
-#             material = form.save(commit=False)
-#             material.project = project
-#             material.total_price = material.price * material.quantity
-#             material.save()
-#             return redirect('detail', pk=project.pk)
-#     else:
-#         form = MaterialForm()
-#     return render(request, 'projects/material_form.html', {'form': form})
+    def get_queryset(self): # new
+        query = self.request.GET.get('q')
+        object_list = Project.objects.filter(
+            Q(project_name__icontains=query) | Q(client_name__icontains=query)
+        )
+        return object_list

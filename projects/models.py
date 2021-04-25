@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django.db.models import Sum
 
 # Create your models here.
 class Project(models.Model):
@@ -18,4 +19,14 @@ class Project(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse("projects:p_detail", kwargs={'pk':self.pk})
+        return reverse("projects:p_detail", kwargs={'slug':self.slug})
+
+    #dynamic data for material expenses
+    @property
+    def mat_exp(self):
+        return self.materials.aggregate(total_price=Sum('total_price'))['total_price']
+
+    #dynamic data for labour payments
+    @property
+    def total_pay(self):
+        return self.labours.aggregate(total_pay=Sum('total_pay'))['total_pay']

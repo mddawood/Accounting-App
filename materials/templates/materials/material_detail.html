@@ -1,6 +1,33 @@
-{% extends 'projects/project_detail_base.html' %}
+{% extends 'base.html' %}
 
-{% block with_pbase %}
-  <h1>Material type: {{material_details.type}}</h1>
-  <h1>Material quantity: {{material_details.quantity}}</h1>
+{% block content %}
+<div class="jumbotron section">
+  <!-- <a class='btn btn-warning' href="{% url 'materials:m_update' pk=material.pk %}">Update</a> -->
+  <a class='btn btn-danger' href="{% url 'materials:m_delete' pk=material.pk %}">Delete</a>
+  <a class='btn btn-primary' href="{% url 'materials:m_update' pk=material.pk %}">Update</a>
+
+  <h1><a href="{% url 'projects:p_detail' slug=material.project.slug %}">Project {{material.project}}</a></h1>
+  <h2>Material type: {{material.type}}</h2>
+  <h2>Supplier: {{material.supplier}}</h2>
+  <h4>Material quantity: {{material.quantity}} | Price per unit: {{material.price}}</h4>
+  <h4>Total: {{material.total_price}}</h4>
+  <h4>Due: {{material.due}}</h4>
+</div>
+
+<div class="container section">
+  <a class='btn btn-primary' href="{% url 'materials:pay' pk=material.pk %}">Pay</a> <a class='btn btn-danger' href="{% url 'materials:m_delete' pk=material.pk %}">Delete</a>
+  <br>
+  <hr>
+  {% for payment in  material.payments.all %}
+  <div class="card">
+    <div class="card-body">
+      <a class='btn btn-primary' href="{% url 'materials:pay_del' pk=payment.pk %}">Delete</a>
+      <p>{{payment.name}}</p>
+      <p>Date: {{payment.date}}</p>
+      <p>Amount paid: {{payment.amount}}</p>
+      <p>Amount due: {{payment.amount_due}}</p>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 {% endblock %}
