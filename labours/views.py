@@ -57,6 +57,9 @@ def PaymentDeleteView(request, pk):
     payment = get_object_or_404(Payment, pk=pk)
     if request.method == "POST":
         l_pk = payment.labour.pk
+        refund = payment.total
+        payment.labour.total_pay -= refund
+        payment.labour.save()
         payment.delete()
         return redirect('labours:l_detail', pk=l_pk)
     return render(request, 'labours/payment_delete.html', {'labour':payment.labour})

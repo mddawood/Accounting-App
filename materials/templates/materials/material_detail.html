@@ -15,7 +15,7 @@
 </div>
 
 <div class="container section">
-  <a class='btn btn-primary' href="{% url 'materials:pay' pk=material.pk %}">Pay</a> <a class='btn btn-danger' href="{% url 'materials:m_delete' pk=material.pk %}">Delete</a>
+  <a class='btn btn-primary' href="{% url 'materials:pay' pk=material.pk %}">Pay</a>
   <br>
   <hr>
   {% for payment in  material.payments.all %}

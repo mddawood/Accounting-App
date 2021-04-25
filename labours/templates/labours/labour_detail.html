@@ -2,8 +2,8 @@
 
 {% block content %}
 <div class="jumbotron section">
-  <a class='btn btn-warning' href="{% url 'labours:l_update' pk=labour.pk %}">Update</a>
-  <a class='btn btn-danger' href="{% url 'labours:l_delete' pk=labour.pk %}">Delete</a>
+  <a class='btn btn-warning' href="{% url 'labours:l_update' pk=labour.pk %}">Update Labour</a>
+  <a class='btn btn-danger' href="{% url 'labours:l_delete' pk=labour.pk %}">Delete Labour</a>
 
   <h1><a href="{% url 'projects:p_detail' slug=labour.project.slug %}">Project {{labour.project}}</a></h1>
   <h2>Labour name: {{labour.name}}</h2>
