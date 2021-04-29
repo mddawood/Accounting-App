@@ -59,7 +59,7 @@
           <h3>Materials used:</h3>
           <ol>
             {% for material in project_details.materials.all %}
-              <li><a href="{% url 'materials:m_detail' pk=material.pk %}">{{material.type}}</a></li>
+              <li><a href="{% url 'materials:m_detail' pk=material.pk %}">{{material.type}}, Supplier: {{material.supplier}}</a></li>
             {% endfor %}
           </ol>
 

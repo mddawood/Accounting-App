@@ -2,6 +2,8 @@ from django.db import models
 from django.urls import reverse
 from projects.models import Project
 from django.utils import timezone
+import datetime
+from django.utils.translation import gettext as _
 
 # Create your models here.
 class Material(models.Model):
@@ -15,7 +17,7 @@ class Material(models.Model):
 
     def __str__(self):
         return self.type
-        
+
     def get_absolute_url(self):
         return reverse(
             "materials:m_detail",
