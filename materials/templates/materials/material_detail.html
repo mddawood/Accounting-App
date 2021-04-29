@@ -9,9 +9,10 @@
   <h1><a href="{% url 'projects:p_detail' slug=material.project.slug %}">Project {{material.project}}</a></h1>
   <h2>Material type: {{material.type}}</h2>
   <h2>Supplier: {{material.supplier}}</h2>
-  <h4>Material quantity: {{material.quantity}} | Price per unit: {{material.price}}</h4>
+  <h4>Material quantity: {{material.quantity}} {{material.unit}} | Price per unit: {{material.price}}</h4>
   <h4>Total: {{material.total_price}}</h4>
   <h4>Due: {{material.due}}</h4>
+  <h4>Receive date: {{material.date}}</h4>
 </div>
 
 <div class="container section">

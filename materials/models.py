@@ -2,8 +2,6 @@ from django.db import models
 from django.urls import reverse
 from projects.models import Project
 from django.utils import timezone
-import datetime
-from django.utils.translation import gettext as _
 
 # Create your models here.
 class Material(models.Model):
@@ -11,9 +9,11 @@ class Material(models.Model):
     type = models.CharField(max_length=200)
     supplier = models.CharField(max_length=200)
     quantity = models.FloatField()
+    unit = models.CharField(max_length=200, default="")
     price = models.FloatField()
     total_price = models.FloatField(blank=True, null=True)
     due = models.FloatField(blank=True, null=True)
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.type
