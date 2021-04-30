@@ -1,11 +1,13 @@
-from . models import Project
+from . models import Project, Payment
 from materials.models import Material
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (TemplateView,ListView,DetailView,CreateView,UpdateView,DeleteView)
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from braces.views import SelectRelatedMixin
-from django.shortcuts import render
 from django.db.models import Q
+from projects.forms import PaymentForm
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 class ProjectListView(LoginRequiredMixin, ListView):
@@ -40,3 +42,28 @@ class SearchResultsView(LoginRequiredMixin, ListView):
             Q(project_name__icontains=query) | Q(client_name__icontains=query)
         )
         return object_list
+
+@login_required
+def CpayCreateView(request, slug):
+    project = get_object_or_404(Project, slug=slug)
+    if request.method == "POST":
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            payment = form.save(commit=False)
+            payment.project = project
+            payment.save()
+            return redirect('projects:p_detail', slug=project.slug)
+    else:
+        form = PaymentForm()
+    return render(request, 'projects/payment_form.html', {'form': form})
+
+
+
+@login_required
+def CpayDeleteView(request, pk):
+    payment = get_object_or_404(Payment, pk=pk)
+    if request.method == 'POST':
+        p_pk = payment.project.pk #storing project pk to redirect after deletion
+        payment.delete()
+        return redirect('projects:p_detail', pk=p_pk)
+    return render(request, 'projects/payment_delete.html', {'project':payment.project})

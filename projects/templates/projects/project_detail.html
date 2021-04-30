@@ -117,13 +117,13 @@
 
           <div class="col-md-5 offset-md-1 jumbotron">
 
-            <p><a class='btn btn-warning' href="{% url 'materials:m_create' slug=project_details.slug %}">Add</a>
+            <p><a class='btn btn-warning' href="{% url 'projects:cp_create' slug=project_details.slug %}">Add client payment</a>
             <h3>Pyament from client:</h3>
-            <ol>
-              {% for material in project_details.materials.all %}
-                <li><a href="{% url 'materials:m_detail' pk=material.pk %}">{{material.type}}, Supplier: {{material.supplier}}</a></li>
+            <ul>
+              {% for payment in project_details.payments.all %}
+                <p>{{payment.name}}. Amount received: {{payment.amount}} on {{payment.date}}</p>
               {% endfor %}
-            </ol>
+            </ul>
 
           </div>
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from django.db.models import Sum
+from django.utils import timezone
 import datetime
 from django.utils.translation import gettext as _
 
@@ -33,3 +34,12 @@ class Project(models.Model):
     @property
     def total_pay(self):
         return self.labours.aggregate(total_pay=Sum('total_pay'))['total_pay']
+
+class Payment(models.Model):
+    project = models.ForeignKey(Project,related_name='payments',on_delete=models.CASCADE)
+    name = models.CharField(max_length = 100)
+    amount = models.FloatField()
+    date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
