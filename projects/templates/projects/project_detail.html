@@ -81,7 +81,7 @@
 
   <!-- Labour and materials section ends -->
 
-  <!-- Contacts and Client Payment section starts -->
+  <!-- Contracts and Client Payment section starts -->
   <section>
 
     <div class="container">
@@ -105,11 +105,11 @@
 
           <div class="col-md-5 jumbotron">
 
-            <p><a class='btn btn-warning' href="{% url 'labours:l_create' slug=project_details.slug %}">Add</a>
+            <p><a class='btn btn-warning' href="{% url 'contracts:c_create' slug=project_details.slug %}">Add</a>
             <h3>Contractors hired:</h3>
             <ol>
-              {% for labour in project_details.labours.all %}
-                <li><a href="{% url 'labours:l_detail' pk=labour.pk %}">{{labour.name}}</a></li>
+              {% for contract in project_details.contracts.all %}
+                <li><a href="{% url 'contracts:c_detail' pk=contract.pk %}">{{contract.contract_type}}, Contractor Name: {{contract.contractor_name}}</a></li>
               {% endfor %}
             </ol>
 
@@ -121,7 +121,7 @@
             <h3>Pyament from client:</h3>
             <ul>
               {% for payment in project_details.payments.all %}
-                <p>{{payment.name}}. Amount received: {{payment.amount}} on {{payment.date}}</p>
+                <p>{{payment.name}}. Amount received: {{payment.amount}} on {{payment.date}} <a class='btn btn-danger' href="{% url 'projects:cp_del' pk=payment.pk %}">Delete</a> </p>
               {% endfor %}
             </ul>
 

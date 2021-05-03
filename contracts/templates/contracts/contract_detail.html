@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron section">
+
+  <h1><a href="{% url 'projects:p_detail' slug=contract.project.slug %}">Project {{contract.project}}</a></h1>
+  <h2>Contract Type: {{contract.contract_type}}</h2>
+  <h2>Contractor Name: {{contract.contractor_name}}</h2>
+  <h4>Expense: {{contract.expense}}</h4>
+  <h4>Due: {{contract.due}}</h4>
+  <h4>Date: {{contract.date}}</h4>
+</div>
+
+<div class="container section">
+  <!-- <a class='btn btn-primary' href="">Pay</a> -->
+  <br>
+  <hr>
+  <!-- {% for payment in  material.payments.all %}
+  <div class="card">
+    <div class="card-body">
+      <a class='btn btn-primary' href="">Delete</a>
+      <p>Payment number: {{payment.name}}</p>
+      <p>Date: {{payment.date}}</p>
+      <p>Amount paid: {{payment.amount}}</p>
+      <p>Amount due: {{payment.amount_due}}</p>
+    </div>
+  </div>
+  {% endfor %} -->
+</div>
+{% endblock %}

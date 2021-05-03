@@ -63,7 +63,7 @@ def CpayCreateView(request, slug):
 def CpayDeleteView(request, pk):
     payment = get_object_or_404(Payment, pk=pk)
     if request.method == 'POST':
-        p_pk = payment.project.pk #storing project pk to redirect after deletion
+        p_slug = payment.project.slug #storing project slug to redirect after deletion
         payment.delete()
-        return redirect('projects:p_detail', pk=p_pk)
+        return redirect('projects:p_detail', slug=p_slug)
     return render(request, 'projects/payment_delete.html', {'project':payment.project})
