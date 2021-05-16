@@ -46,6 +46,8 @@ def PaymentCreateView(request, pk):
             payment.labour = labour
             payment.save()
             labour.total_pay += payment.total
+            labour.project.total_expense += payment.total
+            labour.project.save()
             labour.save()
             return redirect('labours:l_detail', pk=labour.pk)
     else:
@@ -59,6 +61,8 @@ def PaymentDeleteView(request, pk):
         l_pk = payment.labour.pk
         refund = payment.total
         payment.labour.total_pay -= refund
+        payment.labour.project.total_expense -= refund
+        payment.labour.project.save()
         payment.labour.save()
         payment.delete()
         return redirect('labours:l_detail', pk=l_pk)

@@ -12,6 +12,8 @@
     <p>Address: {{project_details.address}}</p>
     <p>Start Date: {{project_details.start_date}}</p>
     <p>Estimated Cost: {{project_details.estimated}}</p>
+    <p>Payment Received : {{project_details.total_client_payment}}</p>
+    <p>Total Expense: {{project_details.total_expense}}</p>
   </div>
 
   <div class="container">
@@ -118,7 +120,7 @@
           <div class="col-md-5 offset-md-1 jumbotron">
 
             <p><a class='btn btn-warning' href="{% url 'projects:cp_create' slug=project_details.slug %}">Add client payment</a>
-            <h3>Pyament from client:</h3>
+            <h3>Payment from client:</h3>
             <ul>
               {% for payment in project_details.payments.all %}
                 <p>{{payment.number}}. Amount received: {{payment.amount}} on {{payment.date}} <a class='btn btn-danger' href="{% url 'projects:cp_del' pk=payment.pk %}">Delete</a> </p>

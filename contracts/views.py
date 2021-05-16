@@ -18,6 +18,8 @@ def ContractCreateView(request, slug):
             contract.project = project
             contract.due = contract.contract_value
             contract.total_contract_value = contract.contract_value
+            contract.project.total_expense += contract.contract_value
+            contract.project.save()
             contract.save()
             return redirect('projects:p_detail', slug=project.slug)
     else:
@@ -38,6 +40,8 @@ def ContractUpdateView(request, pk):
             ContractNew = form.save(commit=False)
             ContractOld.total_contract_value += ContractNew.variation
             ContractOld.due = ContractOld.total_contract_value
+            ContractOld.project.total_expense += ContractOld.variation
+            ContractOld.project.save()
             ContractOld.save()
             return redirect('contracts:c_detail', pk=pk)
     else:
@@ -49,6 +53,8 @@ def ContractDeleteView(request, pk):
     contract = get_object_or_404(Contract, pk = pk)
     if request.method == "POST":
         p_slug = contract.project.slug
+        contract.project.total_expense -= contract.total_contract_value
+        contract.project.save()
         contract.delete()
         return redirect('projects:p_detail', slug=p_slug)
     return render(request, 'contracts/contract_delete.html', {'contract': contract})

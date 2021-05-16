@@ -30,6 +30,8 @@ def MaterialUpdateView(request, pk):
             new_total = MaterialNew.price * MaterialNew.quantity
             MaterialOld.total_price += new_total
             MaterialOld.due += new_total
+            MaterialOld.project.total_expense += new_total
+            MaterialOld.project.save()
             MaterialOld.save()
             return redirect('materials:m_detail', pk=pk)
     else:
@@ -50,6 +52,8 @@ def MaterialCreateView(request, slug):
             material.project = project
             material.total_price = material.price * material.quantity
             material.due = material.total_price
+            material.project.total_expense += material.total_price
+            material.project.save()
             material.save()
             return redirect('projects:p_detail', slug=project.slug)
     else:
