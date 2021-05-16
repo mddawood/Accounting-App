@@ -37,7 +37,7 @@ class Project(models.Model):
 
 class Payment(models.Model):
     project = models.ForeignKey(Project,related_name='payments',on_delete=models.CASCADE)
-    name = models.CharField(max_length = 100)
+    number = models.CharField(max_length = 100)
     amount = models.FloatField()
     date = models.DateField(default=timezone.now)
 

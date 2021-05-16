@@ -9,4 +9,4 @@ class LabourForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     class Meta():
         model = Payment
-        fields = [ 'name', 'days', 'date']
+        fields = [ 'number', 'days', 'type', 'date']

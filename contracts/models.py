@@ -9,7 +9,9 @@ class Contract(models.Model):
     project = models.ForeignKey(Project, related_name='contracts', on_delete=models.CASCADE)
     contractor_name = models.CharField(max_length=200)
     contract_type = models.CharField(max_length=200)
-    expense = models.FloatField()
+    contract_value = models.FloatField()
+    variation = models.FloatField(default = 0.0)
+    total_contract_value = models.FloatField(default = 0.0)
     due = models.FloatField(blank=True, null=True)
     date = models.DateField(default=timezone.now)
 
@@ -28,6 +30,7 @@ class Payment(models.Model):
     contract = models.ForeignKey(Contract, related_name='payments', on_delete=models.CASCADE)
     number = models.CharField(max_length=100)
     date = models.DateField(default=timezone.now)
+    type = models.CharField(max_length=100, default="cash")
     amount = models.FloatField()
     amount_due = models.FloatField(blank=True, null=True)
 

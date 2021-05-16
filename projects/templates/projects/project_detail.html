@@ -121,7 +121,7 @@
             <h3>Pyament from client:</h3>
             <ul>
               {% for payment in project_details.payments.all %}
-                <p>{{payment.name}}. Amount received: {{payment.amount}} on {{payment.date}} <a class='btn btn-danger' href="{% url 'projects:cp_del' pk=payment.pk %}">Delete</a> </p>
+                <p>{{payment.number}}. Amount received: {{payment.amount}} on {{payment.date}} <a class='btn btn-danger' href="{% url 'projects:cp_del' pk=payment.pk %}">Delete</a> </p>
               {% endfor %}
             </ul>
 

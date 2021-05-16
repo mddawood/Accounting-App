@@ -2,29 +2,33 @@
 
 {% block content %}
 <div class="jumbotron section">
-
+  <a class='btn btn-danger' href="{% url 'contracts:c_delete' pk=contract.pk %}">Delete</a>
+  <a class='btn btn-warning' href="{% url 'contracts:c_update' pk=contract.pk %}">Update</a>
   <h1><a href="{% url 'projects:p_detail' slug=contract.project.slug %}">Project {{contract.project}}</a></h1>
   <h2>Contract Type: {{contract.contract_type}}</h2>
   <h2>Contractor Name: {{contract.contractor_name}}</h2>
-  <h4>Expense: {{contract.expense}}</h4>
+  <h4>Contract Value: {{contract.contract_value}}</h4>
+  <h4>Total Contract Value: {{contract.total_contract_value}}</h4>
   <h4>Due: {{contract.due}}</h4>
   <h4>Date: {{contract.date}}</h4>
 </div>
 
 <div class="container section">
-  <!-- <a class='btn btn-primary' href="">Pay</a> -->
+  <a class='btn btn-primary' href="{% url 'contracts:pay' pk=contract.pk %}">Pay</a>
   <br>
   <hr>
-  <!-- {% for payment in  material.payments.all %}
+  {% for payment in  contract.payments.all %}
   <div class="card">
     <div class="card-body">
-      <a class='btn btn-primary' href="">Delete</a>
-      <p>Payment number: {{payment.name}}</p>
+      <a class='btn btn-primary' href="{% url 'contracts:pay_del' pk=payment.pk %}">Delete</a>
+      <p>Payment number: {{payment.number}}</p>
       <p>Date: {{payment.date}}</p>
       <p>Amount paid: {{payment.amount}}</p>
+      <p>Payment type: {{payment.type}}</p>
       <p>Amount due: {{payment.amount_due}}</p>
     </div>
   </div>
-  {% endfor %} -->
+  <br>
+  {% endfor %}
 </div>
 {% endblock %}

@@ -25,6 +25,7 @@
       <a class='btn btn-primary' href="{% url 'materials:pay_del' pk=payment.pk %}">Delete</a>
       <p>Payment number: {{payment.name}}</p>
       <p>Date: {{payment.date}}</p>
+      <p>Payment type: {{payment.type}}</p>
       <p>Amount paid: {{payment.amount}}</p>
       <p>Amount due: {{payment.amount_due}}</p>
     </div>

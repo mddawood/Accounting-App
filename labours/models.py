@@ -26,7 +26,8 @@ class Labour(models.Model):
 
 class Payment(models.Model):
     labour = models.ForeignKey(Labour, related_name='payments',on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
+    number = models.CharField(max_length=200)
+    type = models.CharField(max_length=100, default="cash", blank=True, null=True)
     date = models.DateField(default=timezone.now)
     days = models.FloatField()
     total = models.FloatField(blank=True, null=True)

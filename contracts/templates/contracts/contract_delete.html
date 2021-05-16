@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <form method="POST">
+    {% csrf_token %}
+    Are you want to delete this item ?
+    <input type="submit" value="Yes"/>
+    <a href="{% url 'contracts:c_detail' pk=contract.pk %}">Cancel</a>
+  </form>
+{% endblock %}

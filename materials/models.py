@@ -28,7 +28,8 @@ class Material(models.Model):
 
 class Payment(models.Model):
     material = models.ForeignKey(Material, related_name='payments',on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
+    number = models.CharField(max_length=200)
+    type = models.CharField(max_length=100, default="cash")
     date = models.DateField(default=timezone.now)
     amount = models.FloatField()
     amount_due = models.FloatField(blank=True, null=True)
