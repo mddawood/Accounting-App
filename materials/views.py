@@ -38,9 +38,21 @@ def MaterialUpdateView(request, pk):
         form = MaterialUpdateForm()
     return render(request, 'materials/material_form.html', {'form': form})
 
-class MaterialDeleteView(LoginRequiredMixin, DeleteView):
-    model = Material
-    success_url = reverse_lazy('projects:p_list')
+# class MaterialDeleteView(LoginRequiredMixin, DeleteView):
+#     model = Material
+#     success_url = reverse_lazy('projects:p_list')
+
+@login_required
+def MaterialDeleteView(request, pk):
+    material = get_object_or_404(Material, pk=pk)
+    if request.method == "POST":
+        refund = material.total_price
+        p_slug = material.project.slug
+        material.project.total_expense -= refund
+        material.project.save()
+        material.delete()
+        return redirect('projects:p_detail', slug=p_slug)
+    return render(request, 'materials/material_delete.html', {'material':material})
 
 @login_required
 def MaterialCreateView(request, slug):

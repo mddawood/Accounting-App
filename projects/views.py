@@ -51,6 +51,8 @@ def CpayCreateView(request, slug):
         if form.is_valid():
             payment = form.save(commit=False)
             payment.project = project
+            payment.project.total_client_payment += payment.amount
+            payment.project.save()
             payment.save()
             return redirect('projects:p_detail', slug=project.slug)
     else:
@@ -64,6 +66,8 @@ def CpayDeleteView(request, pk):
     payment = get_object_or_404(Payment, pk=pk)
     if request.method == 'POST':
         p_slug = payment.project.slug #storing project slug to redirect after deletion
+        payment.project.total_client_payment -= payment.amount
+        payment.project.save()
         payment.delete()
         return redirect('projects:p_detail', slug=p_slug)
     return render(request, 'projects/payment_delete.html', {'project':payment.project})

@@ -18,9 +18,22 @@ class LabourUpdateView(LoginRequiredMixin, UpdateView):
     fields = ('name', 'type', 'wage')
     model = Labour
 
-class LabourDeleteView(LoginRequiredMixin, DeleteView):
-    model = Labour
-    success_url = reverse_lazy('projects:p_list')
+# class LabourDeleteView(LoginRequiredMixin, DeleteView):
+#     model = Labour
+#     success_url = reverse_lazy('projects:p_list')
+
+@login_required
+def LabourDeleteView(request, pk):
+    labour = get_object_or_404(Labour, pk=pk)
+    if request.method == "POST":
+        p_slug = labour.project.slug
+        refund = labour.total_pay
+        labour.project.total_expense -= refund
+        labour.project.save()
+        labour.delete()
+        return redirect('projects:p_detail', slug=p_slug)
+    return render(request, 'labours/labour_delete.html', {'labour':labour})
+
 
 @login_required
 def LabourCreateView(request, slug):
