@@ -2,14 +2,13 @@
 
 {% block content %}
 <div class="jumbotron section">
-  <!-- <a class='btn btn-warning' href="{% url 'materials:m_update' pk=material.pk %}">Update</a> -->
+  <h1><a href="{% url 'projects:p_detail' slug=material.project.slug %}">Project {{material.project}}</a></h1>
+  <h2>Material type: {{material.type}}
   <a class='btn btn-danger' href="{% url 'materials:m_delete' pk=material.pk %}">Delete</a>
   <a class='btn btn-primary' href="{% url 'materials:m_update' pk=material.pk %}">Update</a>
-
-  <h1><a href="{% url 'projects:p_detail' slug=material.project.slug %}">Project {{material.project}}</a></h1>
-  <h2>Material type: {{material.type}}</h2>
-  <h2>Supplier: {{material.supplier}}</h2>
-  <h4>Material quantity: {{material.quantity}} {{material.unit}} | Price per unit: {{material.price}}</h4>
+  </h2>
+  <h4>Supplier: {{material.supplier}}</h4>
+  <h6>Material quantity: {{material.quantity}} {{material.unit}} | Price per unit: {{material.price}}</h6>
   <h4>Total: {{material.total_price}}</h4>
   <h4>Due: {{material.due}}</h4>
   <h4>Receive date: {{material.date}}</h4>
@@ -23,7 +22,7 @@
   <div class="card">
     <div class="card-body">
       <a class='btn btn-primary' href="{% url 'materials:pay_del' pk=payment.pk %}">Delete</a>
-      <p>Payment number: {{payment.name}}</p>
+      <p>Payment number: {{payment.number}}</p>
       <p>Date: {{payment.date}}</p>
       <p>Payment type: {{payment.type}}</p>
       <p>Amount paid: {{payment.amount}}</p>

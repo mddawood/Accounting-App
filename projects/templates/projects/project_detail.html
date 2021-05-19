@@ -11,15 +11,17 @@
     <p>Client: {{project_details.client_name}}</p>
     <p>Address: {{project_details.address}}</p>
     <p>Start Date: {{project_details.start_date}}</p>
-    <p>Estimated Cost: {{project_details.estimated}}</p>
-    <p>Payment Received : {{project_details.total_client_payment}}</p>
-    <p>Total Expense: {{project_details.total_expense}}</p>
+
   </div>
 
   <div class="container">
     <div class="card" style="width:62rem">
       <div class="card-body">
-        <h1>Project Details will come here</h1>
+        <h6>
+          <p>Estimated Cost: {{project_details.estimated}}</p>
+          <p>Payment Received : {{project_details.total_client_payment}}</p>
+          <p>Total Expense: {{project_details.total_expense}}</p>
+        </h6>
       </div>
     </div>
   </div>
@@ -92,8 +94,8 @@
         <div class="col-md-5">
           <div class="card">
             <div class="card-body">
-              <p>Number of Contracts:</p>
-              <p>Total payments to Contactors:</p>
+              <p>Number of contracts: {{project_details.contracts.count}}</p>
+              <p>Total expense in contracts: {{project_details.total_contract_value}}</p>
             </div>
           </div>
         </div>

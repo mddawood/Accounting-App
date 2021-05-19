@@ -8,6 +8,7 @@ from django.utils.translation import gettext as _
 
 # Create your models here.
 class Project(models.Model):
+    serial_number = models.CharField(max_length=50, default=0)
     project_name = models.CharField(max_length=200, unique = True)
     slug = models.SlugField(allow_unicode = True, unique = True)
     client_name = models.CharField(max_length = 200)
@@ -36,6 +37,10 @@ class Project(models.Model):
     @property
     def total_pay(self):
         return self.labours.aggregate(total_pay=Sum('total_pay'))['total_pay']
+
+    @property
+    def total_contract_value(self):
+        return self.contracts.aggregate(total_contract_value=Sum('total_contract_value'))['total_contract_value']
 
 class Payment(models.Model):
     project = models.ForeignKey(Project,related_name='payments',on_delete=models.CASCADE)

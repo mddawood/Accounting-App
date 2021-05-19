@@ -57,16 +57,24 @@
     {% block content %}
     {% endblock %}
 
-    <!-- Footer -->
-    <footer class="bg-light text-center text-white">
-      <!-- Copyright -->
+
+    <!-- <footer class="bg-light text-center text-white">
       <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
         © 2021 Copyright:
-        <a class="text-white" href="https://digidesk.in" target="_blank">App developed by Digidesk</a>
+
       </div>
-      <!-- Copyright -->
-    </footer>
-    <!-- Footer -->
+    </footer> -->
+
+    <div class="card">
+      <div class="card-header">
+        © 2021 Copyright
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>App developed by <a href="https://digidesk.in" target="_blank" style="text-align:center">Digidesk</a></p>
+        </blockquote>
+      </div>
+    </div>
 
     <!-- Bootstrap links -->
     <script type="{% static 'js/jquery-1.9.1.min.js' %}"></script>

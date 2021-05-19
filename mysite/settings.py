@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'labours',
     'bootstrap4',
     'crispy_forms',
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
