@@ -12,4 +12,6 @@ urlpatterns = [
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
     path('cpay/in/<slug>', views.CpayCreateView, name='cp_create'),
     path('delcpay/<int:pk>', views.CpayDeleteView, name='cp_del'),
+    path('mis_create/in/<slug>', views.MiscellaneousCreateView, name='mis_create'),
+    path('mis_del/<int:pk>', views.MiscellaneousDeleteView, name='mis_del'),
 ]

@@ -7,28 +7,49 @@
   <a class='btn btn-danger' href="{% url 'materials:m_delete' pk=material.pk %}">Delete</a>
   <a class='btn btn-primary' href="{% url 'materials:m_update' pk=material.pk %}">Update</a>
   </h2>
-  <h4>Supplier: {{material.supplier}}</h4>
-  <h6>Material quantity: {{material.quantity}} {{material.unit}} | Price per unit: {{material.price}}</h6>
-  <h4>Total: {{material.total_price}}</h4>
-  <h4>Due: {{material.due}}</h4>
-  <h4>Receive date: {{material.date}}</h4>
 </div>
 
-<div class="container section">
-  <a class='btn btn-primary' href="{% url 'materials:pay' pk=material.pk %}">Pay</a>
-  <br>
-  <hr>
-  {% for payment in  material.payments.all %}
-  <div class="card">
+<div class="container">
+  <div class="card" style="width:62rem">
     <div class="card-body">
-      <a class='btn btn-primary' href="{% url 'materials:pay_del' pk=payment.pk %}">Delete</a>
-      <p>Payment number: {{payment.number}}</p>
-      <p>Date: {{payment.date}}</p>
-      <p>Payment type: {{payment.type}}</p>
-      <p>Amount paid: {{payment.amount}}</p>
-      <p>Amount due: {{payment.amount_due}}</p>
+      <h6>
+        <h4>Supplier: {{material.supplier}}</h4>
+        <h4>Material quantity: {{material.quantity}} {{material.unit}} | Price per unit: {{material.price}}</h4>
+        <h4>Total: {{material.total_price}}</h4>
+        <h4>Due: {{material.due}}</h4>
+        <h4>Receive date: {{material.date}}</h4>
+      </h6>
     </div>
   </div>
-  {% endfor %}
+</div>
+<br>
+
+<div class="container section">
+  <a class='btn btn-primary' href="{% url 'materials:pay' pk=material.pk %}">Add payment</a>
+  <br>
+  <hr>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Type</th>
+        <th scope="col">Payment amount</th>
+        <th scope="col">Due amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in material.payments.all %}
+      <tr>
+        <td>{{payment.type}}</td>
+        <td>{{payment.amount}}</td>
+        <td>{{payment.amount_due}}</td>
+        <td>{{payment.date}}</td>
+        <td><a class='btn btn-danger' href="{% url 'materials:pay_del' pk=payment.pk %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}

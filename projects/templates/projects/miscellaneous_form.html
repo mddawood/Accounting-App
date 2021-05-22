@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+
+<div class="container">
+  <h1>
+    {% if not form.instance.pk %}
+    Add Miscellaneous expense
+    {% else %}
+    Update Miscellaneous expense
+    {% endif %}
+  </h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    <input type="submit" class='btn btn-primary' value="Submit">
+  </form>
+</div>
+
+
+
+{% endblock %}

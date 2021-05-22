@@ -50,3 +50,14 @@ class Payment(models.Model):
 
     def __str__(self):
         return self.name
+
+class Miscellaneous(models.Model):
+    project = models.ForeignKey(Project,related_name='miscellaneous', on_delete=models.CASCADE)
+    serial_number = models.CharField(max_length=50, default=0)
+    expense_on = models.CharField(max_length=100)
+    expense_by = models.CharField(max_length=100)
+    amount = models.FloatField()
+    date = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self

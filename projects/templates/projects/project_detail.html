@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load mathfilters %}
 
 {% block content %}
 
@@ -18,9 +19,10 @@
     <div class="card" style="width:62rem">
       <div class="card-body">
         <h6>
-          <p>Estimated Cost: {{project_details.estimated}}</p>
-          <p>Payment Received : {{project_details.total_client_payment}}</p>
-          <p>Total Expense: {{project_details.total_expense}}</p>
+          <h4>Estimated Cost: {{project_details.estimated}}</h4>
+          <h4>Payment Received : {{project_details.total_client_payment}}</h4>
+          <h4>Expense: {{project_details.total_expense}}</h4>
+          <h4>Amount in hand: {{project_details.total_client_payment|sub:project_details.total_expense}}</h4>
         </h6>
       </div>
     </div>
@@ -58,26 +60,50 @@
 
         <div class="col-md-5 jumbotron">
 
-          <p><a class='btn btn-warning' href="{% url 'labours:l_create' slug=project_details.slug %}">Add</a>
+          <p><a class='btn btn-primary' href="{% url 'labours:l_create' slug=project_details.slug %}">Add labour</a>
           <h3>Labours used:</h3>
-          <ol>
-            {% for labour in project_details.labours.all %}
-              <li><a href="{% url 'labours:l_detail' pk=labour.pk %}">{{labour.name}}</a></li>
-            {% endfor %}
-          </ol>
-
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Labour name</th>
+                <th scope="col">Labour type</th>
+                <th scope="col">Wage</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for labour in project_details.labours.all %}
+              <tr>
+                <td><a href="{% url 'labours:l_detail' pk=labour.pk %}">{{labour.name}}</a></td>
+                <td>{{labour.type}}</td>
+                <td>{{labour.wage}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
 
         <div class="col-md-5 offset-md-1 jumbotron">
 
-          <p><a class='btn btn-warning' href="{% url 'materials:m_create' slug=project_details.slug %}">Add</a>
+          <p><a class='btn btn-primary' href="{% url 'materials:m_create' slug=project_details.slug %}">Add material</a>
           <h3>Materials used:</h3>
-          <ol>
-            {% for material in project_details.materials.all %}
-              <li><a href="{% url 'materials:m_detail' pk=material.pk %}">{{material.type}}, Supplier: {{material.supplier}}</a></li>
-            {% endfor %}
-          </ol>
-
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Material type</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for material in project_details.materials.all %}
+              <tr>
+                <td><a href="{% url 'materials:m_detail' pk=material.pk %}">{{material.type}}</a></td>
+                <td>{{material.supplier}}</td>
+                <td>{{material.date}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
 
     </div>
@@ -109,31 +135,85 @@
 
           <div class="col-md-5 jumbotron">
 
-            <p><a class='btn btn-warning' href="{% url 'contracts:c_create' slug=project_details.slug %}">Add</a>
+            <p><a class='btn btn-primary' href="{% url 'contracts:c_create' slug=project_details.slug %}">Add contract</a>
             <h3>Contractors hired:</h3>
-            <ol>
-              {% for contract in project_details.contracts.all %}
-                <li><a href="{% url 'contracts:c_detail' pk=contract.pk %}">{{contract.contract_type}}, Contractor Name: {{contract.contractor_name}}</a></li>
-              {% endfor %}
-            </ol>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Type</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for contract in project_details.contracts.all %}
+                <tr>
+                  <td><a href="{% url 'contracts:c_detail' pk=contract.pk %}">{{contract.contract_type}}</a></td>
+                  <td>{{contract.contractor_name}}</td>
+                  <td>{{contract.date}}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
 
           </div>
 
           <div class="col-md-5 offset-md-1 jumbotron">
 
-            <p><a class='btn btn-warning' href="{% url 'projects:cp_create' slug=project_details.slug %}">Add client payment</a>
+            <p><a class='btn btn-primary' href="{% url 'projects:cp_create' slug=project_details.slug %}">Add client payment</a>
             <h3>Payment from client:</h3>
-            <ul>
-              {% for payment in project_details.payments.all %}
-                <p>{{payment.number}}. Amount received: {{payment.amount}} on {{payment.date}} <a class='btn btn-danger' href="{% url 'projects:cp_del' pk=payment.pk %}">Delete</a> </p>
-              {% endfor %}
-            </ul>
-
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for payment in project_details.payments.all %}
+                <tr>
+                  <td>{{payment.amount}}</td>
+                  <td>{{payment.date}}</td>
+                  <td><a class='btn btn-danger' href="{% url 'projects:cp_del' pk=payment.pk %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
           </div>
 
       </div>
     </div>
 
+  </section>
+
+  <!-- Miscellaneous expense section -->
+  <section class="container">
+    <p><a class='btn btn-primary' href="{% url 'projects:mis_create' slug=project_details.slug %}">Add miscellaneous expense</a>
+    <div class="jumbotron">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Expense on</th>
+            <th scope="col">Expense by</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Date</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for miscellaneous in project_details.miscellaneous.all %}
+          <tr>
+            <td>{{miscellaneous.expense_on}}</td>
+            <td>{{miscellaneous.expense_by}}</td>
+            <td>{{miscellaneous.amount}}</td>
+            <td>{{miscellaneous.date}}</td>
+            <td><a class='btn btn-danger' href="{% url 'projects:mis_del' pk=miscellaneous.pk %}">Delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </section>
 
 {% endblock %}

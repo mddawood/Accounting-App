@@ -2,18 +2,26 @@
 
 {% block content %}
 <div class="jumbotron section">
-  <a class='btn btn-warning' href="{% url 'labours:l_update' pk=labour.pk %}">Update Labour</a>
-  <a class='btn btn-danger' href="{% url 'labours:l_delete' pk=labour.pk %}">Delete Labour</a>
-
   <h1><a href="{% url 'projects:p_detail' slug=labour.project.slug %}">Project {{labour.project}}</a></h1>
   <h2>Labour name: {{labour.name}}</h2>
-  <h2>labour type: {{labour.type}}</h2>
-  <h2>Wage: {{labour.wage}}</h2>
-  <h3>Total paid: {{labour.total_pay}}</h3>
-
+  <a class='btn btn-warning' href="{% url 'labours:l_update' pk=labour.pk %}">Update Labour</a>
+  <a class='btn btn-danger' href="{% url 'labours:l_delete' pk=labour.pk %}">Delete Labour</a>
 </div>
 
-<div class="container section">
+<div class="container">
+  <div class="card" style="width:62rem">
+    <div class="card-body">
+      <h6>
+        <h4>Labour type: {{labour.type}}</h4>
+        <h4>Labour wage: {{labour.wage}}</h4>
+        <h4>Total paid: {{labour.total_pay}}</h4>
+      </h6>
+    </div>
+  </div>
+</div>
+<br>
+
+<!-- <div class="container section">
   <a class='btn btn-primary' href="{% url 'labours:pay' pk=labour.pk %}">Pay</a>
   <br>
   <hr>
@@ -29,5 +37,34 @@
     </div>
   </div>
   {% endfor %}
+</div> -->
+
+<div class="container section">
+  <a class='btn btn-primary' href="{% url 'labours:pay' pk=labour.pk %}">Add payment</a>
+  <br>
+  <hr>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Days worked</th>
+        <th scope="col">Payment amount</th>
+        <th scope="col">Payment type</th>
+        <th scope="col">Date</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in labour.payments.all %}
+      <tr>
+        <td>{{payment.days}}</td>
+        <td>{{payment.total}}</td>
+        <td>{{payment.type}}</td>
+        <td>{{payment.date}}</td>
+        <td><a class='btn btn-danger' href="{% url 'labours:pay_del' pk=payment.pk %}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 </div>
 {% endblock %}
