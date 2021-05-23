@@ -4,18 +4,14 @@
 
 {% block content %}
   <br>
-  <!-- <div class="jumbotron">
-    <h3>Here's the list of all the Projects:</h1>
-    <p>To create new project press create</p>
-    <p><a class='btn btn-primary' href="{% url 'projects:p_create' %}">Create</a></p>
-  </div> -->
+
 
   <div class="container">
     <div class="card" style="width:62rem">
       <div class="card-body">
         <div class="container">
-          <h3>Total expense including all the projects: {{expense}}</h3>
           <h3>Total amount received from the clients' side: {{fund}}</h3>
+          <h3>Total expense including all the projects: {{expense}}</h3>
           <h3>Total amount in hand: {{fund|sub:expense}}</h3>
           <p><a class='btn btn-primary' href="{% url 'projects:p_create' %}">Add Project</a></p>
         </div>
@@ -23,32 +19,6 @@
     </div>
   </div>
   <br>
-
-
-  <!-- {% if projects %}
-    <div class="container-fluid">
-      {% for project in projects %}
-      <div class="card box">
-        <div class="card-body">
-          <h5 class="card-title">{{project.project_name}}</h5>
-          <p class="card-text">Client: {{project.client_name}}</p>
-          <a href="{% url 'projects:p_detail' slug=project.slug %}" class="btn btn-primary">Details</a>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-    <br>
-  {% else %}
-  <div class="container-fluid Card_Container">
-    <div class="card box">
-      <div class="card-body">
-        <h5 class="card-title">No projects yet!</h5>
-        <p class="card-text">Click on create to get started</p>
-        <p><a class='btn btn-primary' href="{% url 'projects:p_create' %}">Create</a></p>
-      </div>
-    </div>
-  </div>
-  {% endif %} -->
 
   {% if projects %}
   <table class="table">

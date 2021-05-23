@@ -14,4 +14,4 @@ class MaterialUpdateForm(forms.ModelForm):
 class PaymentForm(forms.ModelForm):
     class Meta():
         model = Payment
-        fields = [ 'number', 'amount', 'type', 'date' ]
+        fields = [ 'amount', 'type', 'date' ]
