@@ -39,7 +39,7 @@ def ContractUpdateView(request, pk):
         if form.is_valid():
             ContractNew = form.save(commit=False)
             ContractOld.total_contract_value += ContractNew.variation
-            ContractOld.due = ContractOld.total_contract_value
+            ContractOld.due += ContractNew.variation
             ContractOld.project.total_expense += ContractOld.variation
             ContractOld.project.save()
             ContractOld.save()

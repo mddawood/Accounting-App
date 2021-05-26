@@ -27,7 +27,7 @@ class ProjectDetailView(LoginRequiredMixin, DetailView):
     template_name = 'projects/project_detail.html'
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
-    fields = ("project_name","client_name","start_date","address", "estimated")
+    fields = ("serial_number", "project_name","client_name","start_date","address", "estimated")
     model = Project
 
 class ProjectUpdateView(LoginRequiredMixin, UpdateView):

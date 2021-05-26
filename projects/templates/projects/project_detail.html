@@ -4,7 +4,7 @@
 
 {% block content %}
 
-  <div class="jumbotron section">
+  <div class="jumbotron section" id="top">
     <h1>Welcome to the Project Detail Page</h1>
     <p><a class='btn btn-warning' href="{% url 'projects:p_update' slug=project_details.slug %}">Update</a>
     <a class='btn btn-danger' href="{% url 'projects:p_delete' slug=project_details.slug %}">Delete</a></p>
@@ -12,6 +12,14 @@
     <p>Client: {{project_details.client_name}}</p>
     <p>Address: {{project_details.address}}</p>
     <p>Start Date: {{project_details.start_date}}</p>
+
+    <div>
+      <a href="#labours"><button type="button" class="btn btn-primary">Labours</button></a>
+      <a href="#materials"><button type="button" class="btn btn-secondary">Materials</button></a>
+      <a href="#contracts"><button type="button" class="btn btn-success">Contracts</button></a>
+      <a href="#client_payments"><button type="button" class="btn btn-info">Client payment</button></a>
+      <a href="#miscellaneous"><button type="button" class="btn btn-dark">Miscellaneous</button></a>
+    </div>
 
   </div>
 
@@ -58,9 +66,9 @@
   <div class="container">
     <div class="row">
 
-        <div class="col-md-5 jumbotron">
+        <div class="col-md-5 jumbotron" id="labours">
 
-          <p><a class='btn btn-primary' href="{% url 'labours:l_create' slug=project_details.slug %}">Add labour</a>
+          <p><a class='btn btn-primary' href="{% url 'labours:l_create' slug=project_details.slug %}">Add labour</a> <a href="#top"><button type="button" class="btn btn-success">Back to top</button></a></p>
           <h3>Labours used:</h3>
           <table class="table">
             <thead>
@@ -82,9 +90,9 @@
           </table>
         </div>
 
-        <div class="col-md-5 offset-md-1 jumbotron">
+        <div class="col-md-5 offset-md-1 jumbotron" id="materials">
 
-          <p><a class='btn btn-primary' href="{% url 'materials:m_create' slug=project_details.slug %}">Add material</a>
+          <p><a class='btn btn-primary' href="{% url 'materials:m_create' slug=project_details.slug %}">Add material</a> <a href="#top"><button type="button" class="btn btn-success">Back to top</button></a></p>
           <h3>Materials used:</h3>
           <table class="table">
             <thead>
@@ -133,9 +141,9 @@
     <div class="container">
       <div class="row">
 
-          <div class="col-md-5 jumbotron">
+          <div class="col-md-5 jumbotron" id="contracts">
 
-            <p><a class='btn btn-primary' href="{% url 'contracts:c_create' slug=project_details.slug %}">Add contract</a>
+            <p><a class='btn btn-primary' href="{% url 'contracts:c_create' slug=project_details.slug %}">Add contract</a> <a href="#top"><button type="button" class="btn btn-success">Back to top</button></a></p>
             <h3>Contractors hired:</h3>
             <table class="table">
               <thead>
@@ -158,9 +166,9 @@
 
           </div>
 
-          <div class="col-md-5 offset-md-1 jumbotron">
+          <div class="col-md-5 offset-md-1 jumbotron" id="client_payments">
 
-            <p><a class='btn btn-primary' href="{% url 'projects:cp_create' slug=project_details.slug %}">Add client payment</a>
+            <p><a class='btn btn-primary' href="{% url 'projects:cp_create' slug=project_details.slug %}">Add client payment</a> <a href="#top"><button type="button" class="btn btn-success">Back to top</button></a></p>
             <h3>Payment from client:</h3>
             <table class="table">
               <thead>
@@ -188,8 +196,8 @@
   </section>
 
   <!-- Miscellaneous expense section -->
-  <section class="container">
-    <p><a class='btn btn-primary' href="{% url 'projects:mis_create' slug=project_details.slug %}">Add miscellaneous expense</a>
+  <section class="container" id="miscellaneous">
+    <p><a class='btn btn-primary' href="{% url 'projects:mis_create' slug=project_details.slug %}">Add miscellaneous expense</a> <a href="#top"><button type="button" class="btn btn-success">Back to top</button></a><p>
     <div class="jumbotron">
       <table class="table">
         <thead>
