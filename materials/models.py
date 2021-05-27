@@ -15,6 +15,9 @@ class Material(models.Model):
     due = models.FloatField(blank=True, null=True)
     date = models.DateField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.type
 
@@ -33,6 +36,9 @@ class Payment(models.Model):
     date = models.DateField(default=timezone.now)
     amount = models.FloatField()
     amount_due = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self.name

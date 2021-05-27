@@ -48,6 +48,9 @@ class Payment(models.Model):
     amount = models.FloatField()
     date = models.DateField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.name
 
@@ -58,6 +61,9 @@ class Miscellaneous(models.Model):
     expense_by = models.CharField(max_length=100)
     amount = models.FloatField()
     date = models.DateField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self

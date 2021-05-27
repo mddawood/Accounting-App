@@ -32,6 +32,9 @@ class Payment(models.Model):
     days = models.FloatField()
     total = models.FloatField(blank=True, null=True)
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return str(self.date)
 

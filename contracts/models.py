@@ -15,6 +15,9 @@ class Contract(models.Model):
     due = models.FloatField(blank=True, null=True)
     date = models.DateField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.contract_type
 
@@ -33,6 +36,9 @@ class Payment(models.Model):
     type = models.CharField(max_length=100, default="cash")
     amount = models.FloatField()
     amount_due = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self.number
